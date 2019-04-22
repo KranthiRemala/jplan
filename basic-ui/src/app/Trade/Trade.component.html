@@ -1,0 +1,118 @@
+<!--
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<div class="modal fade" id="addTransactionModal" tabindex="-1" role="dialog" aria-labelledby="addTransactionModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="GreyHeader">
+        <button type="button" class="close FormClose" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addTransactionModalLabel">Create Transaction</h4>
+        <!-- <p class="modal-intro">Enter the required values below.</p> -->
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+          <div class="form-group text-left">
+            <label for="commodity">Order Id</label>
+            <textarea formControlName="commodity" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="form-group text-left">
+            <label for="newOwner">New Role</label>
+            <textarea formControlName="newOwner" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button (click)="addTransaction(myForm);" type="submit" class="btn btn-success"
+            data-dismiss="modal">Confirm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container col-md-6">
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    <strong>Error:</strong> {{errorMessage}}
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="transaction-title" id='transactionName'></h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div>
+     <div class="container">
+        <button [style.background-color]="transbuttonColor" (click)="resetForm();" type="button" class="btn btn-primary" style="float:left;" data-toggle="modal"  
+        data-target="#addTransactionModal">Record a Transaction</button><br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12" style="font-size: 14px">
+              <br>
+              A transaction involves an Order and the new Owner. <br>Create a new Transaction to add toi the ledger. 
+              <br>
+              <ul>
+                <li><span class="attribute" style="font-size: 12px"><b>Order Id</b></span></li>
+      
+                <li><span class="attribute" style="font-size: 12px"><b>New Role</b></span></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+    
+    <div class="container">
+    <button [style.background-color]="ledgerbuttonColor" mat-button (click)="showLedger()" class="btn btn-primary" style="float:left;">Check Ledger</button>
+  </div>
+  <span style="float:right;"></span>
+  <div class="container">
+    <!-- <a class="btn-btn-primary" style="padding-top:5px; padding-bottom:5px; padding-left: 10px; padding-right: 10px; float:right; background-color: #007ab4; color:#f0f0f1;" href="https://codepen.io/anon/pen/JVYbMa" target="_blank">Show Chain</a>  -->
+  </div>
+
+    <div class="container" *ngIf="this.showTable">
+    
+      <table mat-table class="table table-responsive" style="width:100%; background-color: #1f3138" [dataSource]="this.networkLedgers" class="mat-elevation-z8">
+    
+        <ng-container matColumnDef="commodity">
+          <th mat-header-cell class="thead" *matHeaderCellDef> Order Id </th>
+          <td mat-cell class="thead-cols" style="min-width:100px" *matCellDef="let element"> {{element.commodity}} </td>
+        </ng-container>
+    
+        <ng-container class="table table-responsive" style="margin-right:40px" matColumnDef="newOwner">
+          <th mat-header-cell class="thead" style="min-width:100px;" *matHeaderCellDef>New Owner </th>
+          <td mat-cell class="thead-cols" *matCellDef="let element"> {{element.newOwner}} </td>
+        </ng-container>  
+        
+        <ng-container class="table table-responsive" matColumnDef="timestamp">
+            <th mat-header-cell class="thead" *matHeaderCellDef>Transaction Date </th>
+            <td mat-cell class="thead-cols" *matCellDef="let element"> {{element.timestamp}} </td>
+          </ng-container>
+    
+        <ng-container class="table table-responsive" matColumnDef="transactionId">
+          <th mat-header-cell class="thead" *matHeaderCellDef>Transaction Id </th>
+          <td mat-cell class="thead-cols" *matCellDef="let element"> {{element.transactionId}} </td>
+        </ng-container>  
+    
+        <tr mat-header-row class="thead" *matHeaderRowDef="displayedColoumns"></tr>
+        <tr mat-row class="table table-responsive" *matRowDef="let row; columns: displayedColoumns;"></tr>
+      </table>
+    
+    </div>
+
+    <br>
+    <br>
+ 

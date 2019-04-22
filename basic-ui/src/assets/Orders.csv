@@ -1,0 +1,5 @@
+"OrderId","StyleId","DeptName","SeasonName","WeekName","VendorId","BuyerId","SupplierId","ShippingPoint","ExpectedDate","ManufacturerId","LastOrderRecievedDate","Units","Weight","NumOfStores"
+1001023,"STCLR9001","Womens Apparels","Sprinig Summer 19","Week 14","SSLVND1004","SSLBYR2004","SSLSPL3004","Bhiwandi","05-01-2019","SSLMNF5004","11-05-2018",3500,250,8
+1001024,"STCLR9002","Mens Apparels","Sprinig Summer 19","Week 14","SSLVND7504","SSLBYR8004","SSLSPL9104","Bhiwandi","04-30-2019","SSLMNF6654","10-23-2017",10000,500,15
+1001024,"STCLR9003","Accessories","Sprinig Summer 19","Week 14","SSLVND0504","SSLBYR8094","SSLSPL5104","Bhiwandi","03-20-2019","SSLMNF6659","01-23-2019",1000,50,4
+
